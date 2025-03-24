@@ -37,8 +37,10 @@ export const signup = async (req, res) => {
       name,
       phoneNumber,
       dateOfBirth,
+      profilePicture:
+        "https://raw.githubusercontent.com/Avijit-roy/Images/refs/heads/main/Default_pfp.jpg",
       verificationToken,
-      verificationTokenExpiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // Ensure Date format
+      verificationTokenExpiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
     });
 
     await user.save();

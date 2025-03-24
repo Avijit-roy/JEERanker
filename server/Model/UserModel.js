@@ -30,11 +30,17 @@ const userSchema = new mongoose.Schema(
     phoneNumber: {
       // New field for phone number
       type: String,
-      required: false, // Adjust as necessary
+      required: true, // Adjust as necessary
     },
     dateOfBirth: {
       // New field for date of birth
       type: Date,
+      required: true, // Adjust as necessary
+    },
+    profilePicture: {
+      // New field for profile picture
+      type: String, // You can store the URL or file path
+      default: "", // Default value if no picture is uploaded
       required: false, // Adjust as necessary
     },
   },

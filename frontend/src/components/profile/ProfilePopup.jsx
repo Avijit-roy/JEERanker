@@ -1,15 +1,8 @@
 import { useAuthStore } from "../../store/authStore";
 import PropTypes from "prop-types";
-import md5 from "md5";
 
 function ProfilePopup({ isOpen, onClose }) {
   const { user = {} } = useAuthStore();
-
-  const getGravatarUrl = (email) => {
-    if (!email) return "https://www.gravatar.com/avatar/?d=mp&s=200";
-    const hash = md5(email.toLowerCase().trim());
-    return `https://www.gravatar.com/avatar/${hash}?d=mp&s=200`;
-  };
 
   const formatDate = (dateString) => {
     if (!dateString) return "Not provided";
@@ -51,7 +44,7 @@ function ProfilePopup({ isOpen, onClose }) {
         {/* Profile Content */}
         <div className="flex flex-col items-center">
           <img
-            src={user.photoURL || getGravatarUrl(user.email)}
+            src={user.profilePicture}
             alt="Profile"
             className="w-24 h-24 rounded-full mb-4 border"
           />
