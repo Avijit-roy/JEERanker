@@ -8,21 +8,24 @@ function Dashboard() {
       description: "Connect and chat with fellow students, share study materials, and form study groups in real-time",
       bgColor: "bg-gradient-to-br from-indigo-500 to-indigo-600",
       icon: "https://raw.githubusercontent.com/Avijit-roy/Images/refs/heads/main/icons8-chat-96.png",
-      textColor: "text-white"
+      textColor: "text-white",
+      route: `engage-with-others`
     },
     {
-      title: "Heroicons",
-      description: "A set of 450+ free MIT-licensed SVG icons. Available as basic...",
+      title: "Course Materials",
+      description: "Access comprehensive study resources, lecture notes, and practice exams",
       bgColor: "bg-gradient-to-br from-purple-500 to-purple-600",
-      icon: "⚔",
-      textColor: "text-white"
+      icon: "📚",
+      textColor: "text-white",
+      route: "/courses"
     },
     {
-      title: "Hero Patterns",
-      description: "A collection of over 100 free MIT-licensed high-quality SVG...",
+      title: "Profile Management",
+      description: "Update your personal information, academic details, and preferences",
       bgColor: "bg-gradient-to-br from-cyan-400 to-cyan-500",
-      icon: "◈",
-      textColor: "text-white"
+      icon: "👤",
+      textColor: "text-white",
+      route: "/profile"
     }
   ];
 

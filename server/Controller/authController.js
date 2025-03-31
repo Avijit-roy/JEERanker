@@ -8,6 +8,7 @@ import {
   sendPasswordResetEmail,
   sendResetSuccessEmail,
 } from "../mailtrap/emails.js";
+import cloudinary from "../Utils/Cloudinary.js";
 
 export const signup = async (req, res) => {
   const { email, password, name, phoneNumber, dateOfBirth } = req.body;
@@ -70,6 +71,69 @@ export const signup = async (req, res) => {
   } catch (error) {
     console.error("Signup error:", error);
     res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  try {
+    const { profilePicture } = req.body;
+    // Change req.user._id to req.userId since that's what we use in other functions
+    const userId = req.userId;
+
+    if (!profilePicture) {
+      return res.status(400).json({
+        success: false,
+        message: "Profile picture is required",
+      });
+    }
+
+    // Validate image format
+    if (!profilePicture.startsWith("data:image")) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid image format",
+      });
+    }
+
+    // First import cloudinary at the top of the file
+    const uploadResponse = await cloudinary.uploader.upload(profilePicture, {
+      folder: "profile_pictures",
+      allowed_formats: ["jpg", "png", "jpeg"],
+      transformation: [
+        { width: 500, height: 500, crop: "fill" },
+        { quality: "auto" },
+      ],
+    });
+
+    // Update user profile
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { profilePicture: uploadResponse.secure_url },
+      {
+        new: true,
+        select:
+          "-password -resetPasswordToken -resetPasswordExpiresAt -verificationToken -verificationTokenExpiresAt",
+      }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Profile picture updated successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error in update profile:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update profile picture",
+    });
   }
 };
 

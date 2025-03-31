@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function FeatureCard({ title, description, bgColor, icon, textColor }) {
   return (
@@ -12,9 +13,12 @@ function FeatureCard({ title, description, bgColor, icon, textColor }) {
         <p className="text-gray-600 text-sm mb-4">
           {description}
         </p>
-        <button className="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition-colors text-sm font-medium">
+        <Link
+          to={`/${title.toLowerCase().replace(/\s+/g, '-')}`}
+          className="inline-block bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition-colors text-sm font-medium"
+        >
           Open
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import VerifyEmail from "./components/verifyEmail/verifyEmail";
 import Loader from "./components/loader/loader";
 import { useAuthStore } from "./store/authStore";
 import Dashboard from "./components/dashbord/dashbord"; // ✅ Fixed typo in import
+import ChatPage from "./components/ChatPage/ChatPage"; // ✅ Fixed typo in import
 import ForgotEmail from "./components/Forgot_email/forgot_email";
 import PasswordNoti from "./components/passwordNotification/PasswordNoti";
 import ResetPassword from "./components/reset_password/Reset_password";
@@ -94,7 +95,7 @@ function App() {
 
         {/* Protected Dashboard */}
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-
+        <Route path="/engage-with-others" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
         {/* Signup/Login */}
         <Route path="/signup" element={<RedirectAuthenticatedUser><SignupForm /></RedirectAuthenticatedUser>} />
         <Route path="/login" element={<RedirectAuthenticatedUser><LoginForm /></RedirectAuthenticatedUser>} />

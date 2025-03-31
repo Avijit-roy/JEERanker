@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 function PasswordNoti() {
+  const navigate = useNavigate();
   return (
     <div
       style={{ backgroundColor: "#9333EA" }}
@@ -17,7 +20,12 @@ function PasswordNoti() {
             If an account exists for email@gmail.com, you will receive a password
             reset link shortly.
           </p>
-          <button className="btn btn-primary w-100">Back to Login</button>
+          <button
+            className="btn btn-primary w-100"
+            onClick={() => navigate('/login')}
+          >
+            Back to Login
+          </button>
         </div>
       </div>
     </div>

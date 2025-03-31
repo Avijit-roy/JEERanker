@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
+import { User } from "../Model/UserModel.js";  // Add this import
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = async (req, res, next) => {  // Add async
   const token = req.cookies.token;
   if (!token)
     return res
@@ -14,6 +15,16 @@ export const verifyToken = (req, res, next) => {
         .status(401)
         .json({ success: false, message: "Unauthorized - invalid token" });
 
+    const user = await User.findById(decoded.userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ 
+        success: false,
+        message: "User not found" 
+      });
+    }
+
+    req.user = user;
     req.userId = decoded.userId;
     next();
   } catch (error) {

@@ -24,6 +24,11 @@ function SignupForm() {
     e.preventDefault(); // Prevent page reload
 
     try {
+      const phoneRegex = /^[6-9]\d{9}$/;
+      if (!phoneRegex.test(phone)) {
+        toast.warn("Please enter a valid 10-digit Indian phone number starting with 6-9");
+        return;
+      }
       const errorMessage = validatePassword(password, confirmPassword);
 
       if (errorMessage) {
